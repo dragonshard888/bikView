@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Big BIK</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/3.3.7/css/bootstrap.min.css}"
+          href="../static/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+
+</head>
+<body>
+<div th:include="fragments/header :: header"></div>
+<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+    <form class="form-inline" method="post" th:action="@{/save}" th:object="${bik}">
+        <p>Код контроля <span>*</span>
+            <select id="bikRealyType" name="bikRealyType">
+                <option value="" th:text="${bik.realy?.nameOgr}"/>
+                <option th:each="dropDownItem : ${realyList}"
+                        th:value="${dropDownItem.vkey}"
+                        th:text="${dropDownItem.nameOgr}"/>
+            </select>
+        </p>
+        <p>Тип участника расчетов <span>*</span>
+            <select id="bikPznType" name="bikPznType">
+                <option value="" th:text="${bik.pzn?.name}"/>
+                <option th:each="dropDownItem : ${pznList}"
+                        th:value="${dropDownItem.vkey}"
+                        th:text="${dropDownItem.name}"/>
+            </select></p>
+        <p>Тип участника ситсемы электронных расчетов <span>*</span>
+        <select id="bikUerType" name="bikUerType">
+            <option value="" th:text="${bik.uer?.uername}"/>
+            <option th:each="dropDownItem : ${uerList}"
+                    th:value="${dropDownItem.vkey}"
+                    th:text="${dropDownItem.uername}"/>
+        </select></p>
+        <p>Территория <span>*</span>
+            <select id="bikRegType" name="bikRegType">
+                <option value="" th:text="${bik.rgn?.name}"/>
+                <option th:each="dropDownItem : ${regList}"
+                        th:value="${dropDownItem.vkey}"
+                        th:text="${dropDownItem.name}"/>
+            </select></p>
+        <p>Индекс <input th:field="*{ind}" th:value="${bik.ind}"/></p>
+        <p>Тип населенного пункта
+            <select id="bikTnpType" name="bikTnpType">
+                <option value="" th:text="${bik.tnp?.shortname != null}?${bik.tnp.shortname}"/>
+                <option th:each="dropDownItem : ${tnpList}"
+                        th:value="${dropDownItem.vkey}"
+                        th:text="${dropDownItem.shortname}"/>
+            </select></p>
+        <p>Населенный пункт <input th:field="*{nnp}" th:value="${bik.nnp}"/></p>
+        <p>Адрес <input th:field="*{addr}" th:value="${bik.addr}"/></p>
+        <p>БИК РКЦ <input th:field="*{rkc}" th:value="${bik.rkc}"/></p>
+        <p>БИК <span>*</span><input th:field="*{newnum}" th:value="${bik.newnum}"/></p>
+        <p>Телефон <input th:field="*{telef}" th:value="${bik.telef}"/></p>
+        <p>Регистрационный номер <input th:field="*{regn}" th:value="${bik.regn}"/></p>
+        <p>ОКПО <input th:field="*{okpo}" th:value="${bik.okpo}"/></p>
+        <p>Номер счета <input th:field="*{ksnp}" th:value="${bik.ksnp}"/></p>
+        <p>Дата последнего изменения
+            <input th:field="*{dtIzm}" th:value="${#dates.format(bik.dtIzm, 'dd/MM/yyyy')}"/></p>
+        <p>Дата включения информации
+            <input th:field="*{dateIn}" th:value="${#dates.format(bik.dateIn, 'dd/MM/yyyy')}"/></p>
+        <p>Дата последнего контроля
+            <input th:field="*{dateCh}" th:value="${bik.dateCh != null}?${#dates.format(bik.dateCh, 'dd/MM/yyyy')}"/>
+        </p>
+        <button type="submit" class="btn btn-default">Сохранить</button>
+        <br/>
+        <br/>
+        <button><a style="text-decoration: none" th:href="@{'/delete/' + ${bik.id}}">Удалить</a></button>
+    </form>
+
+</div>
+
+</body>
+</html>

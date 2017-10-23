@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Big BIK</title>
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+<div th:include="fragments/header :: header">
+</div>
+<div style="margin-left: 20px; display:inline-block;">
+    <div><form class="form-inline" method="post" th:action="@{/}">
+        <div class="form-group">
+            <label for="bikField">Введите БИК:</label>
+            <input id="bikField" name="bikField"/>
+        </div>
+        <button type="submit" class="btn btn-default">Найти</button>
+    </form></div>
+    <div><form class="form-inline" method="post" th:action="@{/}">
+        <div class="form-group">
+            <label for="bikRegion">Введите Регион:</label>
+            <input id="bikRegion" name="bikRegion"/>
+        </div>
+        <button type="submit" class="btn btn-default">Найти</button>
+    </form></div>
+
+    <div><form class="form-inline" method="post" th:action="@{/}">
+        <div class="form-group">
+            <label for="bikPznType">Введите Тип участника:</label>
+
+                <select id="bikPznType" name="bikPznType" >
+                    <option vlaue="" th:text="-----"/>
+                    <option th:each="dropDownItem : ${pznList}"
+                            th:value="${dropDownItem.vkey}"
+                            th:text="${dropDownItem.name}" />
+                </select>
+        </div>
+        <button type="submit" class="btn btn-default">Найти</button>
+    </form></div>
+    <h2>Таблица БИК</h2>
+</div>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Код контроля</th>
+            <th>Тип участника расчетов</th>
+            <th>Тип участника ситсемы электронных расчетов</th>
+            <th>Территория</th>
+            <th>Индекс</th>
+            <th>Тип</th>
+            <th>Населенный пункт</th>
+            <th>Адрес</th>
+            <th>БИК РКЦ</th>
+            <th>БИК</th>
+            <th>Телефон</th>
+            <th>Рег. номер</th>
+            <th>ОКПО</th>
+            <th>Дата последнего изменения</th>
+            <th>Номер счета</th>
+            <th>Дата включения информации</th>
+            <th>Дата контроля</th>
+        </tr>
+        </thead>
+        <tr th:each="bik : ${biks}">
+            <td><a th:href="@{'/edit/' + ${bik.id}}" th:text="${bik.id}">test</a></td>
+            <td th:text="${bik.realy?.nameOgr}">test</td>
+            <td th:text="${bik.pzn?.name}">test</td>
+            <td th:text="${bik.uer.uername}">test</td>
+            <td th:text="${bik.rgn.name}">test</td>
+            <td th:text="${bik.ind}">test</td>
+            <td th:text="${bik.tnp?.shortname != null}?${bik.tnp.shortname}"></td>
+            <td th:text="${bik.nnp}">test</td>
+            <td th:text="${bik.addr}">test</td>
+            <td th:text="${bik.rkc}">test</td>
+            <td th:text="${bik.newnum}">test</td>
+            <td th:text="${bik.telef}">test</td>
+            <td th:text="${bik.regn}">test</td>
+            <td th:text="${bik.okpo}">test</td>
+            <td th:text="${#dates.format(bik.dtIzm, 'dd/MM/yyyy')}">test</td>
+            <td th:text="${bik.ksnp}">test</td>
+            <td th:text="${#dates.format(bik.dateIn, 'dd/MM/yyyy')}">test</td>
+            <td th:text="${bik.dateCh != null}?${#dates.format(bik.dateCh, 'dd MMM yyyy')}"></td>
+        </tr>
+    </table>
+    <br/>
+    <button type="button"><a th:href="@{/}">Oчистить</a></button>
+</div>
+<!--<div th:include="fragments/footer :: footer"></div>-->
+</body>
+</html>
