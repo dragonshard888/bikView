@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * TODO: comment
- * @author bartov.dmitriy 20.10.2017   16:36
+ * Класс для распарсивания данных из .DBF  в удобный формат
  */
 @Service
 public class ParserForDBF {
@@ -25,6 +24,7 @@ public class ParserForDBF {
 			//"src/main/resources/dbf/BNKSEEK.DBF"
 			InputStream inputStream  = new FileInputStream( ResourceUtils.getFile(resourceLocation));
 			DBFReader reader = new DBFReader( inputStream);
+			//установка кодировки бд
 			reader.setCharactersetName("CP866");
 
 			int numberOfFields = reader.getFieldCount();

@@ -5,6 +5,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * Основная таблица для БИК
+ */
 @Entity
 @Table(name = "bnkseek", schema = "bigbik")
 public class BnkseekEntity {
